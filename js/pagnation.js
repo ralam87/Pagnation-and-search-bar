@@ -6,7 +6,6 @@ Created by Ruhull Alam Dec 2016
 
 
 //amendents made 23/12/16
-//"It looks like you haven't created your search or pagination links dynamically. "
 // removed HTML mark up and allowed javascript to create elements and add into DOM
 
 ////////////////////////////////////pagnation code/////////////////////////////////// 
