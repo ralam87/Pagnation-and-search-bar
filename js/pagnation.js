@@ -5,6 +5,10 @@ Created by Ruhull Alam Dec 2016
 */
 
 
+//amendents made 23/12/16
+//"It looks like you haven't created your search or pagination links dynamically. "
+// removed HTML mark up and allowed javascript to create elements and add into DOM
+
 ////////////////////////////////////pagnation code/////////////////////////////////// 
 
 var pageNum = 0; // a changing variable that decides what number should be placed in the var textNode
@@ -12,11 +16,25 @@ var liItem = document.getElementsByClassName("student-item cf"); //consolidates 
 var limitPerPage = 10; //set how many items to show per page
 var pagesRequired = Math.floor(liItem.length/limitPerPage); //figures out how many pages are required for every set of 10 students (or whatever limit is set in var limitPerPage);
 
-  
+//create div class for pagnation
+    var MainDivPag = document.createElement("div");
+    MainDivPag.setAttribute("class", "pagination");
+    document.body.append(MainDivPag);
+    
+    var MainUlPag = document.createElement("ul");
+    MainUlPag.setAttribute("id", "idPag");
+    MainUlPag.setAttribute("class", "pagination");
+    document.getElementsByClassName("page")[0].append(MainUlPag);
+    
+
+
 //This function adds the pagination li after taking variable from pageNum and applying it to textNode
 var createPage = function (pageNum) 
 {
-        
+
+
+    
+    
 var divPag = document.getElementById("idPag");
 var liPag = document.createElement("li");
 divPag.append(liPag); //Hey create a li element and attach it to the ul element.
@@ -63,6 +81,10 @@ function hideAll()
       function showResults(startRange, endRange) {
                  for (j = startRange; j < endRange && j < liItem.length; j++) 
                liItem[j].style.display = "block";
+          var showing = document.createElement("p");
+          showing.setAttribute("id", "showing");
+          document.getElementsByTagName("h2")[0].appendChild(showing);
+          
           document.getElementById("showing").innerHTML = "Showing results: ";
           document.getElementById("showing").append(startRange + "-" + (checkResultsNum(startRange, limitPerPage)) + " of " + liItem.length);
       } 
@@ -99,6 +121,38 @@ return startRange+limitPerPage;
 
 
 //////////////////////////////////////search tool code///////////////////////////////////////////////
+//Create mySearch div so I can attach my search function to it later
+var divPagnation = document.createElement("div");
+divPagnation.setAttribute("id", "mySearch");
+//document.getElementsByTagName("h2")[0].appendChild(divPagnation);
+document.getElementsByClassName("page-header cf")[0].append(divPagnation);
+
+
+//Create mySearch forms dynamically
+var forms = document.createElement("form");
+document.getElementById("mySearch").append(forms);
+forms.setAttribute("onsubmit", "return false");
+
+//Creates input text box
+var inputType = document.createElement("input");
+inputType.type = "text submit";
+inputType.setAttribute("id", "inputBox")
+inputType.setAttribute("class", "search")
+inputType.setAttribute("placeholder", "Search for a student here...")
+forms.appendChild(inputType);
+
+//Creates search button to click
+var button = document.createElement("button");
+button.setAttribute("id", "searchForm")
+button.setAttribute("class", "search")
+button.setAttribute("type", "button")
+button.innerHTML = "Search";
+forms.appendChild(button);
+
+document.getElementById("mySearch").style.display ="inline-block";
+document.getElementById("mySearch").style.float ="right";
+
+
 var h3Names = document.getElementsByTagName("h3");
 var counter=0;
 var searchButton = document.getElementById("searchForm").addEventListener("click", function() {

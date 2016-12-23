@@ -128,10 +128,6 @@ body{
     color: silver;
 }
 
-#mySearch {
-    display: inline-block;
-    float: right;
-    }
 
 #inputBox:select {
     border: 3px solid #4286f4;
